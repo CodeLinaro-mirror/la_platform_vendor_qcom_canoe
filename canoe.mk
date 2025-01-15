@@ -150,7 +150,8 @@ TARGET_USES_QMAA_OVERRIDE_FASTRPC := true
 TARGET_USES_QMAA_OVERRIDE_SPU := true
 TARGET_USES_QMAA_OVERRIDE_UWB := true
 TARGET_USES_QMAA_OVERRIDE_SST_CLIENTS := true
-TARGET_USES_QMAA_OVERRIDE_TIME_SERVICES := false
+TARGET_USES_QMAA_OVERRIDE_TIME_SERVICES := true
+TARGET_USES_QMAA_OVERRIDE_VIBRATOR:= true
 
 #Full QMAA HAL List
 QMAA_HAL_LIST := audio video camera display sensors gps
@@ -199,7 +200,7 @@ TARGET_KERNEL_DLKM_DISPLAY_OVERRIDE := true
 TARGET_KERNEL_DLKM_MM_DRV_OVERRIDE := true
 TARGET_KERNEL_DLKM_SECURE_MSM_OVERRIDE := true
 TARGET_KERNEL_DLKM_SECUREMSM_QTEE_OVERRIDE := true
-TARGET_KERNEL_DLKM_LIMITS_OVERRIDE := false
+TARGET_KERNEL_DLKM_LIMITS_OVERRIDE := true
 TARGET_KERNEL_DLKM_TOUCH_OVERRIDE := true
 TARGET_KERNEL_DLKM_VIDEO_OVERRIDE := true
 TARGET_KERNEL_DLKM_WLAN_OVERRIDE := true
@@ -561,6 +562,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
      ro.mediaserver.64b.enable=true
 
+# VM shutdown feature enablement
+PRODUCT_VENDOR_PROPERTIES += \
+     ro.vendor.vm.ssr.enable=false
+
 # Enable support for APEX updates
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
@@ -568,8 +573,6 @@ ifneq ($(TARGET_USES_QMAA), true)
 ifeq ($(TARGET_USES_QMAA_OVERRIDE_ANDROID_CORE),true)
 #enable virtualization service
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
-PRODUCT_COPY_FILES += \
-   packages/modules/Virtualization/apex/permissions/features_com.android.virt.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/features_com.android.virt.xml
 endif
 endif
 
