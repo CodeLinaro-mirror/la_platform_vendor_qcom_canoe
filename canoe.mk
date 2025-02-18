@@ -97,7 +97,7 @@ SYSTEMEXT_SEPARATE_PARTITION_ENABLE := true
 #true means QMAA is enabled for system
 #false means QMAA is disabled for system
 
-TARGET_USES_QMAA := true
+TARGET_USES_QMAA := false
 
 #QMAA flag which is set to incorporate any generic dependencies
 #required for the boot to UI flow in a QMAA enabled target.
@@ -150,6 +150,7 @@ TARGET_USES_QMAA_OVERRIDE_FASTRPC := true
 TARGET_USES_QMAA_OVERRIDE_SPU := true
 TARGET_USES_QMAA_OVERRIDE_UWB := true
 TARGET_USES_QMAA_OVERRIDE_SST_CLIENTS := true
+TARGET_USES_QMAA_OVERRIDE_SECURITY_TESTS := true
 TARGET_USES_QMAA_OVERRIDE_TIME_SERVICES := true
 TARGET_USES_QMAA_OVERRIDE_VIBRATOR:= true
 
@@ -569,12 +570,8 @@ PRODUCT_VENDOR_PROPERTIES += \
 # Enable support for APEX updates
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
-ifneq ($(TARGET_USES_QMAA), true)
-ifeq ($(TARGET_USES_QMAA_OVERRIDE_ANDROID_CORE),true)
-#enable virtualization service
-$(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
-endif
-endif
+#Enable virtualization service
+$(call inherit-product, packages/modules/Virtualization/build/apex/product_packages.mk)
 
 ###################################################################################
 # This is the End of target.mk file.
