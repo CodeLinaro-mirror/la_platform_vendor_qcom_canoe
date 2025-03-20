@@ -20,6 +20,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.m
 PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := lz4
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=true
 
+#Disable the 16K page size checks
+PRODUCT_CHECK_PREBUILT_MAX_PAGE_SIZE := false
+
+
 # Enable debugfs restrictions
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
 
@@ -84,8 +88,6 @@ BOARD_ABL_SIMPLE := false
 else
 BOARD_ABL_SIMPLE := true
 endif
-
-NEED_AIDL_NDK_PLATFORM_BACKEND := true
 
 # Set SYSTEMEXT_SEPARATE_PARTITION_ENABLE if was not already set (set earlier via build.sh).
 SYSTEMEXT_SEPARATE_PARTITION_ENABLE := true
@@ -174,6 +176,8 @@ JAVA_IN_VENDOR_SOONG_WHITE_LIST :=\
 CuttlefishService\
 pasrservice\
 VendorPrivAppPermissionTest\
+MediaDrmAPITest\
+CastSignAPITest\
 
 JAVA_IN_VENDOR_MAKE_WHITE_LIST :=\
 AEye\
@@ -188,7 +192,7 @@ TARGET_KERNEL_VERSION := 5.15
 TARGET_USES_NEW_ION := true
 
 # Disable DLKM generation until build support is available
-TARGET_KERNEL_DLKM_DISABLE := true
+TARGET_KERNEL_DLKM_DISABLE := false
 
 # Tech specific flags
 TARGET_KERNEL_DLKM_AUDIO_OVERRIDE := true
@@ -507,13 +511,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 
-#Charger
-ifeq ($(ENABLE_AB),true)
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/charger_fw_fstab.qti:$(TARGET_COPY_OUT_VENDOR)/etc/charger_fw_fstab.qti
-else
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/charger_fw_fstab_non_AB.qti:$(TARGET_COPY_OUT_VENDOR)/etc/charger_fw_fstab.qti
-endif
-
 PRODUCT_BOOT_JARS += tcmiface
 PRODUCT_BOOT_JARS += telephony-ext
 PRODUCT_PACKAGES += telephony-ext
@@ -545,6 +542,8 @@ endif
 PRODUCT_PACKAGES += vendor.qti.qspa-service qspa-testclient
 
 PRODUCT_PACKAGES += qspa_vendor.rc
+
+PRODUCT_PACKAGES += qspa_application_packages.xml
 
 ##Armv9-Tests##
 PRODUCT_PACKAGES_DEBUG += bti_test_prebuilt \
