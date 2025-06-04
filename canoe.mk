@@ -555,10 +555,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
      ro.mediaserver.64b.enable=true
 
-#AVF VM autostart feature
-PRODUCT_PROPERTY_OVERRIDES += \
-     ro.vendor.qtvm.auto.start=trustedvm
-
 # VM shutdown feature enablement
 PRODUCT_VENDOR_PROPERTIES += \
      ro.vendor.vm.ssr.enable=false
