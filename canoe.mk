@@ -425,8 +425,9 @@ else
 TARGET_USES_QCV := true
 endif
 
-DEVICE_MANIFEST_SKUS := canoe alor
+DEVICE_MANIFEST_SKUS := canoe alor whale
 DEVICE_MANIFEST_CANOE_FILES := device/qcom/canoe/manifest_canoe.xml
+DEVICE_MANIFEST_WHALE_FILES := device/qcom/canoe/manifest_whale.xml
 DEVICE_MANIFEST_ALOR_FILES := device/qcom/canoe/manifest_alor.xml
 
 DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
