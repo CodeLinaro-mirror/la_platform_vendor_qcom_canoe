@@ -248,6 +248,11 @@ SOONG_CONFIG_NAMESPACES += perf
 SOONG_CONFIG_perf += ioctl
 SOONG_CONFIG_perf_ioctl := true
 
+#Namespace definition for Rust dependencies that come from Android for sec-userspace
+SOONG_CONFIG_NAMESPACES += ssg_rustaceans
+SOONG_CONFIG_ssg_rustaceans += android_shipping_level
+SOONG_CONFIG_ssg_rustaceans_android_shipping_level := android16
+
 #-----------------------------------------------------------------
 # wlan specific
 #-----------------------------------------------------------------
