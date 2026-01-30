@@ -121,7 +121,7 @@ BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 0x06000000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 48318382080
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_DTBOIMG_PARTITION_SIZE := 0x1600000
+BOARD_DTBOIMG_PARTITION_SIZE := 0x2300000
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
@@ -247,6 +247,11 @@ SOONG_CONFIG_ufsbsg_ufsframework := bsg
 SOONG_CONFIG_NAMESPACES += perf
 SOONG_CONFIG_perf += ioctl
 SOONG_CONFIG_perf_ioctl := true
+
+#Namespace definition for Rust dependencies that come from Android for sec-userspace
+SOONG_CONFIG_NAMESPACES += ssg_rustaceans
+SOONG_CONFIG_ssg_rustaceans += android_shipping_level
+SOONG_CONFIG_ssg_rustaceans_android_shipping_level := android16
 
 #-----------------------------------------------------------------
 # wlan specific
