@@ -568,6 +568,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_VENDOR_PROPERTIES += \
      ro.vendor.vm.ssr.enable=false
 
+# Dynamic MTE enablement
+PRODUCT_VENDOR_PROPERTIES += \
+     ro.arm64.memtag.bootctl_supported=1
+
 # Enable support for APEX updates
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
