@@ -553,6 +553,9 @@ PRODUCT_PACKAGES += qspa_vendor.rc
 
 PRODUCT_PACKAGES += qspa_application_packages.xml
 
+#modem_crash_capture service
+PRODUCT_PACKAGES_DEBUG += modem_crash_capture
+
 
 # TODO(b/330696629) remove this once device can drop HIDL.
 # This adds hwservicemanager and the allocator service to the device.
